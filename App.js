@@ -1,19 +1,19 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Provider } from "./src/context/BlogContex";
+import { BlogContextProvider } from "./src/context/BlogContex";
 import IndexScreen from "./src/screens/IndexScreen";
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <Provider>
+    <BlogContextProvider>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Blogs" component={IndexScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
+    </BlogContextProvider>
   );
 }
 
