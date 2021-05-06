@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import BlogContext from "../context/BlogContex";
 function EditScreen({ route }) {
-  const { state: Blogs } = useContext(BlogContext);
+  const navigation = useNavigation();
+  const { state: Blogs, editPost } = useContext(BlogContext);
 
   const [info, setInfo] = useState(() => {
     const blog = Blogs.find((item) => item.id == route.params.id);
@@ -10,7 +12,7 @@ function EditScreen({ route }) {
   });
   return (
     <View>
-      <Text style={styles.label}>Enter Title:</Text>
+      <Text style={styles.label}>Enter New Title:</Text>
       <TextInput
         style={styles.input}
         value={info.title}
@@ -21,7 +23,7 @@ function EditScreen({ route }) {
           }))
         }
       />
-      <Text style={styles.label}>Enter Content:</Text>
+      <Text style={styles.label}>Enter New Content:</Text>
       <TextInput
         style={styles.input}
         value={info.content}
@@ -31,6 +33,21 @@ function EditScreen({ route }) {
             content: newValue,
           }))
         }
+      />
+      <Button
+        title="Save"
+        onPress={() => {
+          editPost(
+            {
+              title: info.title,
+              content: info.content,
+              id: Blogs.findIndex((item) => item.id == route.params.id),
+            },
+            () => {
+              navigation.navigate("Blogs");
+            }
+          );
+        }}
       />
       <Text>
         {info.title}
