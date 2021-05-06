@@ -1,25 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Text,
   View,
   StyleSheet,
   FlatList,
-  TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
+import { Button } from "react-native-paper";
 import BlogContext from "../context/BlogContex";
 import { Feather } from "@expo/vector-icons";
 function IndexScreen({ navigation }) {
   const { state: blogPost, addBlogPost, deletePost } = useContext(BlogContext);
-  const [blog, setBlog] = useState("");
   const addPost = () => {
-    addBlogPost({ title: blog, content: "" });
-    setBlog("");
+    navigation.navigate("Create");
   };
   return (
     <View>
-      <Button title="Add Post" onPress={addPost} />
+      <Button onPress={addPost} mode="contained" color="orange">
+        Feeling Lucky?
+      </Button>
       <FlatList
         data={blogPost}
         keyExtractor={(post) => post.id}
@@ -40,11 +39,6 @@ function IndexScreen({ navigation }) {
             </View>
           </TouchableOpacity>
         )}
-      />
-      <TextInput
-        value={blog}
-        onChangeText={setBlog}
-        onEndEditing={(e) => addBlogPost(e.nativeEvent.text)}
       />
     </View>
   );

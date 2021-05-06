@@ -18,9 +18,10 @@ const reducer = (state, action) => {
   }
 };
 const addBlogPost = (dispatch) => {
-  return (value) => {
+  return (value, callback) => {
     if (!value) return;
     dispatch({ type: "ADD_POST", payload: value });
+    callback();
   };
 };
 const deletePost = (dispatch) => {
