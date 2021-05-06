@@ -1,5 +1,4 @@
 import createDataContext from "./createContextData";
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_POST":
