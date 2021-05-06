@@ -7,6 +7,7 @@ function ShowScreen({ route }) {
   return (
     <View>
       <Text>{post.title}</Text>
+      <Text>{post.content}</Text>
     </View>
   );
 }
