@@ -7,7 +7,8 @@ const reducer = (state, action) => {
         ...state,
         {
           id: Math.floor(Math.random() * 99999).toString(),
-          title: action.payload,
+          title: action.payload.title,
+          content: action.payload.content,
         },
       ];
     case "DELETE_POST":
@@ -19,6 +20,7 @@ const reducer = (state, action) => {
 };
 const addBlogPost = (dispatch) => {
   return (value) => {
+    if (!value) return;
     dispatch({ type: "ADD_POST", payload: value });
   };
 };

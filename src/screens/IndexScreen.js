@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import BlogContext from "../context/BlogContex";
 import { Feather } from "@expo/vector-icons";
-function IndexScreen() {
+function IndexScreen({ navigation }) {
   const { state: blogPost, addBlogPost, deletePost } = useContext(BlogContext);
   const [blog, setBlog] = useState("");
   const addPost = () => {
-    addBlogPost(blog);
+    addBlogPost({ title: blog, content: "" });
     setBlog("");
   };
   return (
@@ -24,12 +24,21 @@ function IndexScreen() {
         data={blogPost}
         keyExtractor={(post) => post.id}
         renderItem={({ item }) => (
-          <View style={styles.row}>
-            <Text style={styles.title}>{item.title}</Text>
-            <TouchableOpacity onPress={() => deletePost({ id: item.id })}>
-              <Feather style={styles.icon} name="trash" />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Show", {
+                id: item.id,
+                title: "Show Blog Post",
+              })
+            }
+          >
+            <View style={styles.row}>
+              <Text style={styles.title}>{item.title}</Text>
+              <TouchableOpacity onPress={() => deletePost({ id: item.id })}>
+                <Feather style={styles.icon} name="trash" />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
         )}
       />
       <TextInput
