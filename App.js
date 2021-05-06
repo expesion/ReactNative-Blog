@@ -36,19 +36,7 @@ function RightSideIndex() {
     </TouchableOpacity>
   );
 }
-function RightSideEdit() {
-  const navigation = useNavigation();
-  return (
-    <TouchableOpacity onPress={() => navigation.navigate("Edit")}>
-      <EvilIcons
-        name="pencil"
-        size={35}
-        style={{ marginRight: 15 }}
-        color="white"
-      />
-    </TouchableOpacity>
-  );
-}
+
 function App() {
   return (
     <PaperProvider theme={theme}>
@@ -73,14 +61,7 @@ function App() {
                 headerRight: (props) => <RightSideIndex {...props} />,
               }}
             />
-            <Stack.Screen
-              name="Show"
-              component={ShowScreen}
-              options={{
-                title: "Selected Blog",
-                headerRight: (props) => <RightSideEdit {...props} />,
-              }}
-            />
+            <Stack.Screen name="Show" component={ShowScreen} />
 
             <Stack.Screen name="Create" component={CreateScreen} />
             <Stack.Screen name="Edit" component={EditScreen} />
